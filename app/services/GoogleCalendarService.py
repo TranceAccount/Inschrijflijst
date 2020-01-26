@@ -2,6 +2,7 @@ import httplib2
 
 from oauth2client import client
 from oauth2client.file import Storage
+from oauth2client.clientsecrets import InvalidClientSecretsError
 from googleapiclient.discovery import build
 
 from app.models import Setting
@@ -82,13 +83,16 @@ class FlowService:
 		"""
 		Instantiate Flow object from client secrets
 		"""
-		self.flow = client.flow_from_clientsecrets(
-			filename=self.CLIENT_SECRET_FILE,
-			scope=self.SCOPES,
-			redirect_uri=redirect_uri
-		)
-		self.flow.params['access_type'] = 'offline'
-		self.flow.params['prompt'] = 'consent'
+		try:
+			self.flow = client.flow_from_clientsecrets(
+				filename=self.CLIENT_SECRET_FILE,
+				scope=self.SCOPES,
+				redirect_uri=redirect_uri
+			)
+			self.flow.params['access_type'] = 'offline'
+			self.flow.params['prompt'] = 'consent'
+		except InvalidClientSecretsError:
+			raise RuntimeError('Client secrets invalid')
 
 	def get_authorize_url(self):
 		return self.flow.step1_get_authorize_url()

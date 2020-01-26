@@ -15,8 +15,11 @@ class FCMService:
         Get credentials
         """
 		self.base_url = base_url
-		cred = credentials.Certificate(self.FCM_CLIENT_SECRET_FILE)
-		self.app = firebase_admin.initialize_app(cred)
+		try:
+			cred = credentials.Certificate(self.FCM_CLIENT_SECRET_FILE)
+			self.app = firebase_admin.initialize_app(cred)
+		except FileNotFoundError:
+			raise RuntimeError('Client secrets invalid')
 
 	def notify(self, app_event):
 		"""

@@ -19,26 +19,33 @@ class AdminView(StaffRequiredMixin, BetterView):
 	def __init__(self, route, request):
 		super().__init__(route, request)
 		# Instantiate FlowService
-		self.flow = FlowService(request.base_url + reverse('admin-calendar-flow'))
+		try:
+			self.flow = FlowService(request.base_url + reverse('admin-calendar-flow'))
+		except RuntimeError:
+			self.flow = None
+			messages.error(request, _("Google Kalender-verbinding niet mogelijk omdat Google OAuth niet ingesteld is."))
 
 	def show(self, request):
-		# Get authorization URL for link
-		authorize_url = self.flow.get_authorize_url()
+		if self.flow:
+			# Get authorization URL for link
+			authorize_url = self.flow.get_authorize_url()
 
-		# Try to instantiate GoogleCalendarService and get list of calendars
-		try:
-			cal_service = GoogleCalendarService(request.base_url)
-			cals = cal_service.get_calendars()
-			active_cal = cal_service.calendar
-		except RuntimeError:
-			cals = None
-			active_cal = None
+			# Try to instantiate GoogleCalendarService and get list of calendars
+			try:
+				cal_service = GoogleCalendarService(request.base_url)
+				cals = cal_service.get_calendars()
+				active_cal = cal_service.calendar
+			except RuntimeError:
+				cals = None
+				active_cal = None
 
-		return render(request, 'admin.html', {
-			'authorize_url': authorize_url,
-			'cals': cals,
-			'active_cal': active_cal
-		})
+			return render(request, 'admin.html', {
+				'authorize_url': authorize_url,
+				'cals': cals,
+				'active_cal': active_cal
+			})
+		else:
+			return render(request, 'admin.html')
 
 	def calendar(self, request):
 		# Set 'active' calendar

@@ -1,0 +1,10 @@
+Django
+django-auth-ldap
+django-bootstrap3
+django-bootstrap3-datetimepicker-3
+django-post-office
+google-api-python-client
+html2text
+mysqlclient
+oauth2client
+firebase-admin
