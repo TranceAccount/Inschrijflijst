@@ -1,5 +1,6 @@
 {% load static %}
 {% load bootstrap3 %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -27,13 +28,13 @@
 			<h2>Alembic</h2>
 			<h3>Inschrijfsysteem</h3>
 			<br>
-			<p>Welkom bij het inschrijfsysteem! Log hieronder in met je Alembic-account.</p>
+			<p>{% trans "Welkom bij het inschrijfsysteem! Log hieronder in met je Alembic-account." %}</p>
 
 			<form class="form-signin" method="post">
 				{% csrf_token %}
 				{% bootstrap_form form %}
 				{% buttons %}
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Inloggen" %}</button>
 				{% endbuttons %}
 			</form>
 		</div>

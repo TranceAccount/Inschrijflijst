@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inschrijflijst v3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-27 22:23+0200\n"
+"POT-Creation-Date: 2020-05-13 20:02+0200\n"
 "PO-Revision-Date: 2019-05-27 22:30+0200\n"
 "Last-Translator: Lars Veldscholte <lars@tuxplace.nl>\n"
 "Language-Team: \n"
@@ -512,6 +512,10 @@ msgstr "Multiple choice"
 msgid "Vul hier de opties, gescheiden door een komma (of enter) in."
 msgstr "Enter here the options, separated by a comma (or enter)."
 
+#: .\app\templates\include\footer.html:9
+msgid "Geschreven door"
+msgstr "Written by"
+
 #: .\app\templates\include\menu.html:16
 msgid "Admin"
 msgstr "Admin"
@@ -544,6 +548,16 @@ msgstr ""
 #: .\app\templates\mail_create.html:19
 msgid "Verzenden"
 msgstr "Send"
+
+#: .\app\templates\registration\login.html:31
+msgid ""
+"Welkom bij het inschrijfsysteem! Log hieronder in met je Alembic-account."
+msgstr ""
+"Welcome to the enrollmentsystem! Please log in with your Alembic-account."
+
+#: .\app\templates\registration\login.html:37
+msgid "Inloggen"
+msgstr "Login"
 
 #: .\app\templates\registration_create.html:7
 msgid "Voeg inschrijvingen toe aan lijst"
@@ -584,17 +598,28 @@ msgstr "Edit enrolment"
 msgid "Bewerk inschrijving van %(first_name)s %(last_name)s voor %(event)s"
 msgstr "Edit enrolment of %(first_name)s %(last_name)s for %(event)s"
 
-#: .\app\views\AdminView.py:48
+#: .\app\views\AdminView.py:26
+msgid ""
+"Google Kalender-verbinding niet mogelijk omdat Google OAuth niet ingesteld "
+"is."
+msgstr ""
+"Google Calender-connection not possible because Google OAuth is not set."
+
+#: .\app\views\AdminView.py:55
 msgid "Kalender ingesteld!"
 msgstr "Calendar set!"
 
-#: .\app\views\AdminView.py:61
+#: .\app\views\AdminView.py:68
 msgid "Google-account gekoppeld!"
 msgstr "Google account linked!"
 
-#: .\app\views\AdminView.py:72
+#: .\app\views\AdminView.py:79
 msgid "Commissies geupdatet!"
 msgstr "Committees updated!"
+
+#: .\app\views\CalendarView.py:19
+msgid "Geen kalender ingesteld."
+msgstr "No calendar set!"
 
 #: .\app\views\EventView.py:71
 msgid "Inschrijflijst bijgewerkt!"
